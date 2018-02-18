@@ -53,13 +53,13 @@ CrocodileCash.conf
 
 Seeking to perform a 1:1 coin swap of the old CROC to this more modern and streamlined version before the old coin supply exceeds 3,300,000 CROC.  We want to pre-announce this and allow sufficient lead-time for holders, mining pools, and exchanges to move to this new chain.
 
-To incentivize users of the old form of the chain to adopt this new one, we plan to reinstate the same Distributed Proof-of-Stake period (such that holders of the old coin will end up with a greater proportion of the current stake in the new chain). 
+To incentivize users (of the earlier form of this chain) to adopt this new one, we plan to reinstate a substantially-similar Distributed Proof-of-Stake period (such that holders of the old coin will end up with a greater proportion of the current stake in the new chain). 
 
 We plan to reduce the block sizes from the extremely large (for a cryptocurrency) 20 MB to 750 kB (or 1 MB ???)
 
-We plan to put hardwired seed nodes itto the code.
+We plan to put hardwired seed nodes into the code.
 
-Checkpoints will become more regular or frequent.
+Checkpoints will become more frequent.
 
 
 [...]
