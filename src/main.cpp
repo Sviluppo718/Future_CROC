@@ -1156,8 +1156,30 @@ int64 GetProofOfWorkReward(unsigned int nBits)
 // ppcoin: miner's coin stake is rewarded based on coin age spent (coin-days)
 int64 GetProofOfStakeReward(int64 nCoinAge)
 {
-    static int64 nRewardCoinYear = CENT;  // creation amount per coin-year
-    int64 nSubsidy = nCoinAge * 33 / (365 * 33 + 8) * nRewardCoinYear;
+    int64_t nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);  //default 12% yr
+
+    // Proof-of-Stake begins at block 1440 (again)
+    if(pindexBest->nHeight+1 >= 1440 && pindexBest->nHeight+1 <= 20160)
+    {
+        nSubsidy = 60 * COIN;
+    }
+        else if(pindexBest->nHeight+1 >= 20161 && pindexBest->nHeight+1 <= 40320)
+    {
+        nSubsidy = 45 * COIN;
+    }
+        else if(pindexBest->nHeight+1 >= 40321 && pindexBest->nHeight+1 <= 60480)
+    {
+        nSubsidy = 30 * COIN;
+    }
+	    else if(pindexBest->nHeight+1 >= 60481 && pindexBest->nHeight+1 <= 80640)
+    {
+        nSubsidy = 15 * COIN;
+    }
+        else if(pindexBest->nHeight+1 >= 80641)
+    {
+        nSubsidy = nCoinAge * COIN_YEAR_REWARD * 33 / (365 * 33 + 8);  //default 12% yr
+    } 
+    
     if (fDebug && GetBoolArg("-printcreation"))
         printf("GetProofOfStakeReward(): create=%s nCoinAge=%" PRI64d"\n", FormatMoney(nSubsidy).c_str(), nCoinAge);
     return nSubsidy;
