@@ -69,7 +69,7 @@ static const int64_t COIN_YEAR_REWARD = 12 * CENT; // 12%
 
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY_PPC = 500;
+static const int COINBASE_MATURITY_CROC = 500;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const int STAKE_TARGET_SPACING = 1 * 30; // CrocodileCash - 30 second blocks 
 static const int STAKE_MIN_AGE = 60 * 60 * 2; // (2 hours): minimum age for coin age
