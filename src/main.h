@@ -65,11 +65,7 @@ inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONE
 static const int64 MIN_TX_FEE = CENT;
 static const int64 MIN_RELAY_TX_FEE = CENT;
 
-
-static const int64 MAX_MINT_PROOF_OF_WORK = 9999 * COIN;   // Seeking to remove this behavior
-
-static const int64_t COIN_YEAR_REWARD = 12 * CENT; // 12%     Added this 
-
+static const int64_t COIN_YEAR_REWARD = 12 * CENT; // 12% 
 
 static const int64 MIN_TXOUT_AMOUNT = MIN_TX_FEE;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
