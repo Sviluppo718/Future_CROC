@@ -1123,34 +1123,24 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 GetProofOfWorkReward(unsigned int nBits)
 {
-    CBigNum bnSubsidyLimit = MAX_MINT_PROOF_OF_WORK;
-    CBigNum bnTarget;
-    bnTarget.SetCompact(nBits);
-    CBigNum bnTargetLimit = bnProofOfWorkLimit;
-    bnTargetLimit.SetCompact(bnTargetLimit.GetCompact());
-
-    // ppcoin: subsidy is cut in half every 16x multiply of difficulty
-    // A reasonably continuous curve is used to avoid shock to market
-    // (nSubsidyLimit / nSubsidy) ** 4 == bnProofOfWorkLimit / bnTarget
-    CBigNum bnLowerBound = CENT;
-    CBigNum bnUpperBound = bnSubsidyLimit;
-    while (bnLowerBound + CENT <= bnUpperBound)
-    {
-        CBigNum bnMidValue = (bnLowerBound + bnUpperBound) / 2;
-        if (fDebug && GetBoolArg("-printcreation"))
-            printf("GetProofOfWorkReward() : lower=%" PRI64d" upper=%" PRI64d" mid=%" PRI64d"\n", bnLowerBound.getuint64(), bnUpperBound.getuint64(), bnMidValue.getuint64());
-        if (bnMidValue * bnMidValue * bnMidValue * bnMidValue * bnTargetLimit > bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnSubsidyLimit * bnTarget)
-            bnUpperBound = bnMidValue;
-        else
-            bnLowerBound = bnMidValue;
+    int64_t nSubsidy = 0 * COIN;
+ 
+    if(pindexBest->nHeight+1 <= 1)
+    {  // Premine to permit coin-swap of Mk I CROC (excess to be used for airdrop or bounties)
+        nSubsidy = 3,200,000 * COIN;
     }
-
-    int64 nSubsidy = bnUpperBound.getuint64();
-    nSubsidy = (nSubsidy / CENT) * CENT;
+        else if(pindexBest->nHeight+1 >= 2  && pindexBest->nHeight+1 <= 4000)
+    {  // A shorter period of higher mining reward (to not inflate the coin supply too much)
+        nSubsidy = 15 * COIN;
+    }
+        else if(pindexBest->nHeight+1 >= 4001)
+    {
+        nSubsidy = 1 * COIN;
+    } 
+    
     if (fDebug && GetBoolArg("-printcreation"))
-        printf("GetProofOfWorkReward() : create=%s nBits=0x%08x nSubsidy=%" PRI64d"\n", FormatMoney(nSubsidy).c_str(), nBits, nSubsidy);
-
-    return min(nSubsidy, MAX_MINT_PROOF_OF_WORK);
+        printf("GetProofOfWorkReward() : create=%s nSubsidy=%"PRId64"\n", FormatMoney(nSubsidy).c_str(), nSubsidy); 
+    return nSubsidy;
 }
 
 // ppcoin: miner's coin stake is rewarded based on coin age spent (coin-days)
