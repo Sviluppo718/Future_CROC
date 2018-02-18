@@ -33,7 +33,7 @@ class CCoinControl;
 struct CBlockIndexWorkComparator;
 
 /** The maximum allowed size for a serialized block, in bytes (network rule) */
-static const unsigned int MAX_BLOCK_SIZE = 1000000;
+static const unsigned int MAX_BLOCK_SIZE = 750000;
 /** Obsolete: maximum size for mined blocks */
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 /** Default for -blockmaxsize, maximum size for mined blocks **/
@@ -59,7 +59,7 @@ static const unsigned int UNDOFILE_CHUNK_SIZE = 0x100000; // 1 MiB
 /** Fake height value used in CCoins to signify they are only in the memory pool (since 0.8) */
 static const unsigned int MEMPOOL_HEIGHT = 0x7FFFFFFF;
 /** No amount larger than this (in satoshi) is valid */
-static const int64 MAX_MONEY = 2000000000 * COIN;
+static const int64 MAX_MONEY = 55000000 * COIN;
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 static const int64 MIN_TX_FEE = CENT;
 static const int64 MIN_RELAY_TX_FEE = CENT;
